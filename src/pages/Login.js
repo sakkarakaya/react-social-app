@@ -9,35 +9,21 @@ const useStyles = makeStyles({
         marginTop: "3rem"
     }
 })
-const SignUp = () => {
+const Login = () => {
     const formik = useFormik({
         initialValues: {
-          displayName: '',
-          email: '',
-          password: '',
+            email: '',
+            password: '',
         },
         onSubmit: (values) => {
-          firebase.register(values.displayName, values.email, values.password)
+            firebase.login(values.email, values.password)
         },
-      });
+    });
     const classes = useStyles()
-    const clickGoogle = () => {
-        firebase.signwithGoogle()
-    }
     return (
         <Container className={classes.wrapper} maxWidth="xs">
             <form onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="displayName"
-                            label="Username"
-                            variant="outlined"
-                            value={formik.values.displayName}
-                            onChange={formik.handleChange}
-                            fullWidth
-                        />
-                    </Grid>
                     <Grid item xs={12}>
                         <TextField
                             id="email"
@@ -66,23 +52,13 @@ const SignUp = () => {
                             color="secondary"
                             fullWidth
                         >
-                            Sign Up
-                </Button>
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            fullWidth
-                            onClick={clickGoogle}
-                        >
-                            Sign Up with Google
-                </Button>
-                    </Grid>
+                            Login
+                        </Button>
+                    </Grid>                    
                 </Grid>
             </form>
         </Container>
     )
 }
 
-export default SignUp
+export default Login
