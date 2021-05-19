@@ -1,13 +1,13 @@
 import React from 'react'
-import SignUp from './pages/SignUp'
-import Navbar from './components/Navbar'
+import Router from './Router'
+import AuthContextProvider from './context/AuthContext'
+
 
 function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <SignUp />
-    </div>
+    <AuthContextProvider>
+      <Router />
+    </AuthContextProvider>
   );
 }
 
