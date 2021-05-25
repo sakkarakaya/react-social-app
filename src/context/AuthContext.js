@@ -8,7 +8,7 @@ const AuthContext = (props) => {
 
     useEffect(() => {
         firebase.firebaseAuth.onAuthStateChanged((user)=>{
-            console.log("userr", user)
+            //console.log("userr", user)
             setCurrentUser(user)
         })
     }, [])

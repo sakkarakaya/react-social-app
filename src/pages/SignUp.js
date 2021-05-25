@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, TextField, Grid, Container } from '@material-ui/core';
+import { Button, TextField, Grid, Container, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import firebase from '../firebase/firebase.utils'
@@ -24,7 +24,8 @@ const validationSchema = Yup.object().shape({
 });
 const useStyles = makeStyles({
     wrapper: {
-        marginTop: "3rem"
+        marginTop: "3rem",
+        textAlign: "center"
     }
 })
 const SignUp = () => {
@@ -46,31 +47,36 @@ const SignUp = () => {
     }
     return (
         <Container className={classes.wrapper} maxWidth="xs">
-           
+                <Typography variant="h5">Register</Typography>
                 <form onSubmit={handleSubmit}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <TextField
+                                error={errors.displayName}
                                 id="displayName"
                                 label="Username"
                                 variant="outlined"
+                                defaultValue="Hello World"
+                                helperText={errors.displayName}
                                 value={values.displayName}
                                 onChange={handleChange}
                                 fullWidth
                             />
                         </Grid>
-                        <div>{errors.displayName}</div>
+                        
                         <Grid item xs={12}>
                             <TextField
                                 id="email"
                                 label="Email Address"
                                 variant="outlined"
                                 value={values.email}
+                                error={errors.email}
+                                helperText={errors.email}
                                 onChange={handleChange}
                                 fullWidth
                             />
                         </Grid>
-                        <div>{errors.email}</div>
+                        
                         <Grid item xs={12}>
                             <TextField
                                 id="password"
@@ -78,11 +84,13 @@ const SignUp = () => {
                                 type="password"
                                 variant="outlined"
                                 value={values.password}
+                                error={errors.password}
+                                helperText={errors.password}
                                 onChange={handleChange}
                                 fullWidth
                             />
                         </Grid>
-                        <div>{errors.password}</div>
+                       
                         <Grid item xs={12}>
                             <TextField
                                 id="confirm_password"
@@ -90,11 +98,13 @@ const SignUp = () => {
                                 type="password"
                                 variant="outlined"
                                 value={values.confirm_password}
+                                error={errors.confirm_password}
+                                helperText={errors.confirm_password}
                                 onChange={handleChange}
                                 fullWidth
                             />
                         </Grid>
-                        <div>{errors.confirm_password}</div>
+                        
                         <Grid item xs={12}>
                             <Button
                                 type="submit"
