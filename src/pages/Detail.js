@@ -12,6 +12,7 @@ import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import { CircularProgress } from '@material-ui/core';
 import { red } from '@material-ui/core/colors';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import ShareIcon from '@material-ui/icons/Share';
@@ -41,6 +42,9 @@ const useStyles = makeStyles((theme) => ({
     avatar: {
         backgroundColor: red[500],
     },
+    circular: {
+        margin: "auto"
+    }
 }));
 
 const BASE_URL = 'https://dummyapi.io/data/api';
@@ -50,6 +54,7 @@ const Detail = () => {
     const data = useLocation()
     const selected_id = data.state.id
     const [datalist, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
@@ -59,18 +64,21 @@ const Detail = () => {
     };
 
     useEffect(() => {
+        setLoading(true);
         axios.get(`${BASE_URL}/user/${selected_id}`, { headers: { 'app-id': APP_ID } })
             .then((res) => setData(res.data))
             .catch(console.error)
+            .finally(() => setLoading(false));
     }, [selected_id])
     console.log("detail", datalist)
     return (
         <div>
+            {loading ? <CircularProgress className={classes.circular}/> :
             <Card className={classes.root}>
                 <CardHeader
                     avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            r
+                        <Avatar aria-label="avatar" className={classes.avatar}>
+                            {datalist?.firstName?.charAt(0)}
                         </Avatar>
                     }
                     action={
@@ -123,6 +131,7 @@ const Detail = () => {
                     </CardContent>
                 </Collapse>
             </Card>
+            }
         </div>
     )
 }
