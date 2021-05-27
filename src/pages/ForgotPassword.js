@@ -19,17 +19,16 @@ const Login = () => {
     const formik = useFormik({
         initialValues: {
             email: '',
-            password: '',
         },
         onSubmit: (values) => {
-            firebase.login(values.email, values.password)
+            firebase.forgotPassword(values.email)
         },
     });
     const classes = useStyles()
     return (
         <Container className={classes.wrapper} maxWidth="xs">
             <Typography component="h1" variant="h5">
-                Sign in
+                Reset Password
             </Typography>
             <form className={classes.form} onSubmit={formik.handleSubmit}>
                 <Grid container spacing={3}>
@@ -43,17 +42,7 @@ const Login = () => {
                             fullWidth
                         />
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            id="password"
-                            label="Password"
-                            type="password"
-                            variant="outlined"
-                            value={formik.values.password}
-                            onChange={formik.handleChange}
-                            fullWidth
-                        />
-                    </Grid>
+                    
                     <Grid item xs={12}>
                         <Button
                             type="submit"
@@ -61,21 +50,10 @@ const Login = () => {
                             color="secondary"
                             fullWidth
                         >
-                            Login
+                            Submit
                         </Button>
                     </Grid>
-                    <Grid container>
-                        <Grid item xs>
-                            <Link href="/forgot-password" variant="body2">
-                                Forgot password?
-                            </Link>
-                        </Grid>
-                        <Grid item>
-                            <Link href="/register" variant="body2">
-                                {"Don't have an account? Sign Up"}
-                            </Link>
-                        </Grid>
-                    </Grid>
+                    
                 </Grid>
             </form>
         </Container>

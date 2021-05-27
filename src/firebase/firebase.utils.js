@@ -36,6 +36,9 @@ class Firebase {
     signOut(){
         firebase.auth().signOut()
     }
+    forgotPassword(email){
+        firebase.auth().sendPasswordResetEmail(email)
+    }
 }
 export default new Firebase()
 

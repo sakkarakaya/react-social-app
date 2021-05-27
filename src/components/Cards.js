@@ -12,7 +12,7 @@ import Typography from '@material-ui/core/Typography';
 const useStyles = makeStyles({
   root: {
     maxWidth: 300,
-  
+
   },
   media: {
     height: 300,
@@ -21,16 +21,17 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MediaCard({data}) {
+export default function MediaCard({ data }) {
   const classes = useStyles();
   const history = useHistory();
+
   return (
     <Card className={classes.root}>
-      <CardActionArea onClick={()=>{
-          history.push({
-              pathname: "/detail/" + data.id,
-              state: data
-          })
+      <CardActionArea onClick={() => {
+        history.push({
+          pathname: "/detail/" + data.id,
+          state: data
+        })
       }}>
         <CardMedia
           className={classes.media}
@@ -49,7 +50,12 @@ export default function MediaCard({data}) {
         <Button size="small" color="primary">
           Share
         </Button>
-        <Button size="small" color="primary">
+        <Button onClick={() => {
+          history.push({
+            pathname: "/detail/" + data.id,
+            state: data
+          })
+        }} size="small" color="primary">
           Learn More
         </Button>
       </CardActions>
