@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Grid from '@material-ui/core/Grid';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -47,17 +48,28 @@ export default function MediaCard({ data }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button onClick={() => {
-          history.push({
-            pathname: "/detail/" + data.id,
-            state: data
-          })
-        }} size="small" color="primary">
-          Learn More
-        </Button>
+      <Grid container direction="row" justify="center" alignItems="center">
+          <Grid item>
+            <Button onClick={() => {
+              history.push({
+                pathname: "/detail/" + data.id + "/posts",
+                state: data
+              })
+            }} size="small" color="primary">
+              Posts
+            </Button>
+          </Grid>
+          <Grid item >
+            <Button onClick={() => {
+              history.push({
+                pathname: "/detail/" + data.id,
+                state: data
+              })
+            }} size="small" color="primary">
+              Full Profile
+            </Button>
+          </Grid>
+        </Grid>
       </CardActions>
     </Card>
   );
