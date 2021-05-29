@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, TextField, Grid, Container, Typography, Link } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import firebase from '../firebase/firebase.utils'
@@ -32,6 +33,7 @@ const useStyles = makeStyles({
     }
 })
 const SignUp = () => {
+    const history = useHistory();
     const { handleChange, values, handleSubmit, errors } = useFormik({
         initialValues: {
             displayName: '',
@@ -42,9 +44,12 @@ const SignUp = () => {
         validationSchema,
         onSubmit: (values) => {
             firebase.register(values.displayName, values.email, values.password)
+            history.push('/login')
         },
     });
-    const classes = useStyles()
+    
+    const classes = useStyles();
+    
     const clickGoogle = () => {
         firebase.signwithGoogle()
     }

@@ -48,7 +48,7 @@ export default function Navbar() {
           </Typography>
           {currentUser && (
             <>
-              <Button color="inherit">{currentUser.displayName}</Button>
+              <Button color="inherit">{currentUser.email}</Button>
               <Button onClick={signOutClick} color="inherit">Sign Out</Button>
             </>
           )}

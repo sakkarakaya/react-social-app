@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { useHistory } from 'react-router-dom';
 import { Button, TextField, Grid, Container, Link, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useFormik } from 'formik';
 import firebase from '../firebase/firebase.utils'
+import { FirebaseAuthContext } from '../context/AuthContext'
 
 const useStyles = makeStyles({
     wrapper: {
@@ -16,6 +18,8 @@ const useStyles = makeStyles({
     }
 })
 const Login = () => {
+    const { currentUser } = useContext(FirebaseAuthContext);
+    const history = useHistory();
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -23,11 +27,15 @@ const Login = () => {
         },
         onSubmit: (values) => {
             firebase.login(values.email, values.password)
+            history.push('/')
         },
     });
     const classes = useStyles()
     return (
         <Container className={classes.wrapper} maxWidth="xs">
+            {currentUser && <Typography component="h4">
+                You have successfully registered. Please sign in.
+            </Typography>}
             <Typography component="h1" variant="h5">
                 Sign in
             </Typography>
